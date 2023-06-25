@@ -1,13 +1,13 @@
 //폰트사이즈 rem
 @function rem($size) {
   $default-size: 16px;
-  $remSize: $size / $default-size;
+  $remSize: calc($size / $default-size);
   @return #{$remSize}rem;
 }
 //간격사이즈 rem
 @function remInterval($size) {
   $default-size: 16px;
-  $remSize: $size / $default-size;
+  $remSize: calc($size / $default-size);
   @return #{$remSize}rem;
 }
 
