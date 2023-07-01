@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { GoCheck } from 'react-icons/go';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
@@ -37,7 +36,7 @@ const TodoItem = ({todoItem, doneTodo, deleteTodo, updateTodo}) => {
                     </label>
                 </div>
                 <div className="todo__item-buttonarea">
-                    <Link to={`/`} className="todo__item-button">
+                    <Link to={`/Components/${id}`} className="todo__item-button">
                     <TiEdit className="todo__item-button-icon update" onClick={onClickEditTodo}/>
                     </Link>
                     <button type="button" className="todo__item-button" onClick={onClickDelTodo}>
