@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import TodoInput from '../Components/TodoInput'
 import TodoList from '../Components/TodoList'
@@ -7,9 +7,11 @@ const Home = () => {
 
     const [ todoList, setTodoList ] = useState([]);
 
+    /*
     const addTodo = (item) => {
         setTodoList([...todoList,item])
     }
+    */
 
     const doneTodo = (id) => {
       setTodoList(
@@ -17,7 +19,6 @@ const Home = () => {
           return el.id === id ? {...el, isComplete: !el.isComplete} : el
         })
       )
-
     }
 
     const deleteTodo = (id) => {
@@ -32,6 +33,37 @@ const Home = () => {
       console.log(id);
     }
 
+    useEffect(()=>{
+      getTodo();
+    }, [])
+
+    const getTodo = async () => {
+      const data = await fetch('/todos');
+      const result = await data.json();
+      setTodoList(result);
+      console.log('getTodo', todoList);
+    }
+
+    const postTodo = async (item) => {
+      console.log('postTodo', item);
+      setTodoList([...todoList,item])
+      const req = {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(item),
+      }
+      const data = await fetch('/todos', req);
+      const result = await data.json();
+      console.log('post', result)
+      getTodo();
+    }
+    
   return (
     <>
         <header>
@@ -39,7 +71,8 @@ const Home = () => {
           <h2 className="todo__title">What’s the Plan for Today?</h2>
         </header>
         <TodoInput 
-          addTodo={addTodo}
+          // addTodo={addTodo}
+          postTodo={postTodo}
           todoList={todoList}
           />
         <TodoList 

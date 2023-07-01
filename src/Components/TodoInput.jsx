@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-const TodoInput = ({addTodo, todoList}) => {
+// const TodoInput = ({addTodo, todoList}) => {
+const TodoInput = ({postTodo, todoList}) => {
   //logic
   const [ inputValue, setInputValue ] = useState('');
   
@@ -25,11 +26,12 @@ const TodoInput = ({addTodo, todoList}) => {
     }
 
     const todoItem = {
-        id: Date.now(),
+        //id: Date.now(),
         text: trimValue,
         isComplete: false
     }
-    addTodo(todoItem)
+    // addTodo(todoItem)
+    postTodo(todoItem)
     setInputValue('');
   }
 
