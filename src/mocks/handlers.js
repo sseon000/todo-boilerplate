@@ -22,11 +22,28 @@ export const handlers = [
   rest.post('/todos', (req, res, ctx) => {
     const store = window.localStorage.getItem(KEY);
     const data = typeof req.body === 'string' && JSON.parse(req.body);
-    console.log('req', req.body);
-    console.log('data', data);
     const newItem = {
       id: Math.floor(Math.random() * 99999),
-      ...req.body,
+      // ...req.body,
+      ...data
+    };
+    if (store !== null) {
+      const result = [...JSON.parse(store), newItem];
+      window.localStorage.setItem(KEY, JSON.stringify(result));
+    } else {
+      window.localStorage.setItem(KEY, JSON.stringify([newItem]));
+    }
+    return res(ctx.status(200), ctx.json(newItem));
+  }),
+
+  // 2023.07.02
+  rest.put('/todos/:itemId', (req, res, ctx) => {
+    const store = window.localStorage.getItem(KEY);
+    const data = typeof req.body === 'string' && JSON.parse(req.body);
+    const newItem = {
+      id: Math.floor(Math.random() * 99999),
+      // ...req.body,
+      ...data
     };
     if (store !== null) {
       const result = [...JSON.parse(store), newItem];
@@ -63,6 +80,7 @@ export const handlers = [
 
   rest.delete('/todos/:itemId', (req, res, ctx) => {
     const id = req.params.itemId;
+    console.log('del', id)
     const store = window.localStorage.getItem(KEY);
     const filterArr =
       typeof store === 'string' &&

@@ -16,13 +16,15 @@ const TodoInput = ({postTodo, todoList}) => {
       return
      }
     // 중복체크
-    const dupTodo = todoList.some(element => element.text === trimValue);
-    console.log('some',dupTodo);
-    // todoList.find(element => element.text === trimValue)
-    if(dupTodo) {
-      alert('이미 등록된 할 일 입니다.');
-      setInputValue('');
-      return
+    if(todoList !== null) {
+      const dupTodo =  todoList.some(element => element.text === trimValue);
+      // console.log('some',dupTodo);
+      // todoList.find(element => element.text === trimValue)
+      if(dupTodo) {
+        alert('이미 등록된 할 일 입니다.');
+        setInputValue('');
+        return
+      }
     }
 
     const todoItem = {
