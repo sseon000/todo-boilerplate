@@ -3,33 +3,30 @@ import { useState } from 'react'
 import TodoInput from '../Components/TodoInput'
 import TodoList from '../Components/TodoList'
 
+interface ITodoList {
+  id: number
+  text: string
+  isComplete: boolean
+}
 const Home = () => {
+  const [todoList, setTodoList] = useState<ITodoList[]>([]);
 
-  const [todoList, setTodoList] = useState([]);
-
-  /*
-  const addTodo = (item) => {
-      setTodoList([...todoList,item])
-  }
-  */
-
-  const doneTodo = async (id) => {
-
+  const doneTodo = async (id: number) => {
     setTodoList(
       todoList.map((el) => {
         return el.id === id ? { ...el, isComplete: !el.isComplete } : el
       })
     )
 
+    /*
     const updateTodo = todoList.filter((el) => {
       return el.id === id ? el : {...el}
     })
-    
-    const data = await fetch(`/todos/${id}`)
-
+    */
+    //const data = await fetch(`/todos/${id}`)
   }
 
-  const deleteTodo = async (id) => {
+  const deleteTodo = async (id: number) => {
     setTodoList(
       todoList.filter((el) => {
         return el.id !== id
@@ -39,10 +36,11 @@ const Home = () => {
     const data = await fetch(`/todos/${id}`, {
       method: 'DELETE',
     });
-    
+    console.log('delete data', data.status);
+    if(data.status === 200) alert('정상적으로 삭제 됐습니다.')
   }
 
-  const updateTodo = (id) => {
+  const updateTodo = (id: number) => {
     console.log(id);
   }
 
@@ -58,13 +56,21 @@ const Home = () => {
   }, [])
 
 
-  const postTodo = async (item) => {
+  interface IItem {
+    text: string
+    isComplete: boolean
+  }
+  const postTodo = async (item: IItem) => {
     const data = await fetch('/todos', {
       method: 'POST',
       body: JSON.stringify(item),
     });
-    console.log('postdata : ', data);
-    const result = await data.json();
+    interface IResult {
+      id: number
+      text: string
+      isComplete: boolean
+    }
+    const result: IResult = await data.json();
 
     setTodoList([...todoList, result]);
   }

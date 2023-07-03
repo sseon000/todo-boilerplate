@@ -1,23 +1,34 @@
 import React, { useState } from 'react'
 
-// const TodoInput = ({addTodo, todoList}) => {
-const TodoInput = ({postTodo, todoList}) => {
-  //logic
-  const [ inputValue, setInputValue ] = useState('');
+interface IItem {
+  text: string
+  isComplete: boolean
+}
+interface ITodoList {
+  id: number
+  text: string
+  isComplete: boolean
+}
+interface ITodoInputProps {
+  postTodo: (item: IItem) => void
+  todoList: ITodoList[]
+}
+const TodoInput = (props: ITodoInputProps) => {
+  
+  const [ inputValue, setInputValue ] = useState<string>('');
   
 
-  const onSubmitTodo = (e) => {
+  const onSubmitTodo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let trimValue = inputValue.trim()
-    
+    let trimValue = inputValue.trim();
     // 빈값체크
      if(!trimValue) {
       alert('할 일을 입력해주세요');
       return
      }
     // 중복체크
-    if(todoList !== null) {
-      const dupTodo =  todoList.some(element => element.text === trimValue);
+    if(props.todoList !== null) {
+      const dupTodo =  props.todoList.some(element => element.text === trimValue);
       // console.log('some',dupTodo);
       // todoList.find(element => element.text === trimValue)
       if(dupTodo) {
@@ -27,18 +38,17 @@ const TodoInput = ({postTodo, todoList}) => {
       }
     }
 
+
     const todoItem = {
-        //id: Date.now(),
         text: trimValue,
         isComplete: false
     }
-    // addTodo(todoItem)
-    postTodo(todoItem)
+    props.postTodo(todoItem)
     setInputValue('');
   }
 
-  const onChangeTodo = (e) => {
-    const { value } = e.target;
+  const onChangeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value:string = e.target.value;
     setInputValue(value);
   }
   // html

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",                                 
+    "lib": [
+      "dom",
+      "dom.iterable",
+      ],                                        
+      "allowJs": true,                                  
+      "skipLibCheck": true,                             
+      "strict": true,                                   
+      "forceConsistentCasingInFileNames": true,         
+      "noEmit": true,                                   
+      "esModuleInterop": true,
+      //"module": "esnext",                             
+      //"moduleResolution": "node",
+      //"resolveJsonModule": true,
+      "isolatedModules": true,                          
+      "jsx": "preserve",                                
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+, "src/Components/TodoInput.jsx", "src/Pages/Home.tsx", "src/Pages/Home.tsx"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
