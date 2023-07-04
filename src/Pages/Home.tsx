@@ -8,53 +8,22 @@ interface ITodoList {
   text: string
   isComplete: boolean
 }
-const Home = () => {
+const Home = (): React.JSX.Element => {
   const [todoList, setTodoList] = useState<ITodoList[]>([]);
-
-  const doneTodo = async (id: number) => {
-    setTodoList(
-      todoList.map((el) => {
-        return el.id === id ? { ...el, isComplete: !el.isComplete } : el
-      })
-    )
-
-    /*
-    const updateTodo = todoList.filter((el) => {
-      return el.id === id ? el : {...el}
-    })
-    */
-    //const data = await fetch(`/todos/${id}`)
-  }
-
-  const deleteTodo = async (id: number) => {
-    setTodoList(
-      todoList.filter((el) => {
-        return el.id !== id
-      })
-    )
-
-    const data = await fetch(`/todos/${id}`, {
-      method: 'DELETE',
-    });
-    console.log('delete data', data.status);
-    if(data.status === 200) alert('정상적으로 삭제 됐습니다.')
-  }
-
-  const updateTodo = (id: number) => {
-    console.log(id);
-  }
+  // 페이징 처리... 필요한 변수
+  // totalTodoCnt : todo 수
+  // pageLimit    : 1페이지당 todo 수 -> 5개
+  // curPage      : 현재페이지
+  // maxPage      : 마지막페이지
 
   useEffect(() => {
-    
     const getTodo = async () => {
       const data = await fetch('/todos');
       const result = await data.json();
       result && setTodoList(result);
     }
-
     getTodo();
   }, [])
-
 
   interface IItem {
     text: string
@@ -73,6 +42,41 @@ const Home = () => {
     const result: IResult = await data.json();
 
     setTodoList([...todoList, result]);
+  }
+
+  const doneTodo = async (id: number) => {
+
+
+    setTodoList(
+      todoList.map((el) => {
+        return el.id === id ? { ...el, isComplete: !el.isComplete } : el
+      })
+    )
+  }
+
+  const updateTodo = (id: number) => {
+    console.log(id);
+  }
+
+/*
+  const updateTodo = todoList.filter((el) => {
+    return el.id === id ? el : {...el}
+  })
+  //const data = await fetch(`/todos/${id}`)
+  */
+  
+  const deleteTodo = async (id: number) => {
+    setTodoList(
+      todoList.filter((el) => {
+        return el.id !== id
+      })
+    )
+
+    const data = await fetch(`/todos/${id}`, {
+      method: 'DELETE',
+    });
+    console.log('delete data', data.status);
+    if(data.status === 200) alert('정상적으로 삭제 됐습니다.')
   }
 
   return (

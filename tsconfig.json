@@ -19,8 +19,8 @@
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx"
-, "src/Components/TodoInput.jsx", "src/Pages/Home.tsx", "src/Pages/Home.tsx"  ],
+    "**/*.tsx", 
+    "src/Components/TodoInput.jsx", "src/Pages/Home.tsx", "src/Pages/Home.tsx", "src/App.jsx"  ],
   "exclude": [
     "node_modules"
   ]

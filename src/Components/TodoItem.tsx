@@ -4,8 +4,25 @@ import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 
-const TodoItem = ({todoItem, doneTodo, deleteTodo, updateTodo}) => {
-
+/*
+interface todoItem {
+    id: number
+    text: string
+    isComplete: boolean
+}
+interface ITodoItemPros {
+    todoItem: todoItem
+    doneTodo: (id: number) => void
+    deleteTodo: (id: number) => void
+    updateTodo: (id: number) => void
+} 
+const TodoItem = (props: ITodoItemPros) => {
+*/
+const TodoItem = ({todoItem, doneTodo, deleteTodo, updateTodo}: {todoItem: {
+    id: number
+    text: string
+    isComplete: boolean
+}, doneTodo: (id: number) => void, deleteTodo: (id: number) => void, updateTodo: (id: number) => void}): any=> {
     const { id, text, isComplete } = todoItem
 
     const onCheckedTodo = () => {
