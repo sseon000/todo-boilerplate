@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState  } from 'react'
+import Pagination from '../Components/Pagination'
 import TodoInput from '../Components/TodoInput'
 import TodoList from '../Components/TodoList'
 
@@ -11,10 +11,14 @@ interface ITodoList {
 const Home = (): React.JSX.Element => {
   const [todoList, setTodoList] = useState<ITodoList[]>([]);
   // 페이징 처리... 필요한 변수
+  // page         : 현재페이지
+  // setPage      : setPage
+  // todoLimit    : 1페이지당 todo 수 -> 5개
   // totalTodoCnt : todo 수
-  // pageLimit    : 1페이지당 todo 수 -> 5개
-  // curPage      : 현재페이지
-  // maxPage      : 마지막페이지
+
+  const [page, setPage] = useState<number>(1);
+  const todoLimit: number = 5;
+  let totalTodoCnt: number = todoList.length;
 
   useEffect(() => {
     const getTodo = async () => {
@@ -98,6 +102,10 @@ const Home = (): React.JSX.Element => {
           updateTodo={updateTodo}
         />
       }
+      <Pagination 
+        page={page}
+        setPage={setPage}
+      />
     </>
   )
 }
