@@ -19,7 +19,7 @@ const Home = (): React.JSX.Element => {
   const [page, setPage] = useState<number>(1);
   const todoLimit: number = 5;
   let totalTodoCnt: number = todoList.length;
-
+  
   useEffect(() => {
     const getTodo = async () => {
       const data = await fetch('/todos');
@@ -105,6 +105,8 @@ const Home = (): React.JSX.Element => {
       <Pagination 
         page={page}
         setPage={setPage}
+        todoLimit={todoLimit}
+        totalTodoCnt={totalTodoCnt}
       />
     </>
   )
