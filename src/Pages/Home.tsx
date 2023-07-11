@@ -1,5 +1,4 @@
 import React, { useEffect, useState  } from 'react'
-import Pagination from '../Components/Pagination'
 import TodoInput from '../Components/TodoInput'
 import TodoList from '../Components/TodoList'
 
@@ -10,15 +9,6 @@ interface ITodoList {
 }
 const Home = (): React.JSX.Element => {
   const [todoList, setTodoList] = useState<ITodoList[]>([]);
-  // 페이징 처리... 필요한 변수
-  // page         : 현재페이지
-  // setPage      : setPage
-  // todoLimit    : 1페이지당 todo 수 -> 5개
-  // totalTodoCnt : todo 수
-
-  const [page, setPage] = useState<number>(1);
-  const todoLimit: number = 5;
-  let totalTodoCnt: number = todoList.length;
   
   useEffect(() => {
     const getTodo = async () => {
@@ -61,13 +51,6 @@ const Home = (): React.JSX.Element => {
   const updateTodo = (id: number) => {
     console.log(id);
   }
-
-/*
-  const updateTodo = todoList.filter((el) => {
-    return el.id === id ? el : {...el}
-  })
-  //const data = await fetch(`/todos/${id}`)
-  */
   
   const deleteTodo = async (id: number) => {
     setTodoList(
@@ -86,11 +69,9 @@ const Home = (): React.JSX.Element => {
   return (
     <>
       <header>
-        <h1 className="todo__title" style={{ color: 'yellowgreen' }}>세상을 바꾸는건 꿈을꾸고 도전하는 사람들의 몫이다!</h1>
         <h2 className="todo__title">What’s the Plan for Today?</h2>
       </header>
       <TodoInput
-        // addTodo={addTodo}
         postTodo={postTodo}
         todoList={todoList}
       />
@@ -102,12 +83,6 @@ const Home = (): React.JSX.Element => {
           updateTodo={updateTodo}
         />
       }
-      <Pagination 
-        page={page}
-        setPage={setPage}
-        todoLimit={todoLimit}
-        totalTodoCnt={totalTodoCnt}
-      />
     </>
   )
 }

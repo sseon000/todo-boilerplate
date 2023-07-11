@@ -8,8 +8,6 @@ interface ITodoList {
 }
 interface ITodoListProps {
   todoList: ITodoList[]
-  // doneTodo: (id: number) => Promise<void>
-  // deleteTodo: (id: number) => Promise<void>
   doneTodo: (id: number) => void
   deleteTodo: (id: number) => void
   updateTodo: (id: number) => void

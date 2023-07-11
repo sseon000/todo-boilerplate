@@ -4,20 +4,6 @@ import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 
-/*
-interface todoItem {
-    id: number
-    text: string
-    isComplete: boolean
-}
-interface ITodoItemPros {
-    todoItem: todoItem
-    doneTodo: (id: number) => void
-    deleteTodo: (id: number) => void
-    updateTodo: (id: number) => void
-} 
-const TodoItem = (props: ITodoItemPros) => {
-*/
 const TodoItem = ({todoItem, doneTodo, deleteTodo, updateTodo}: {todoItem: {
     id: number
     text: string
@@ -34,18 +20,15 @@ const TodoItem = ({todoItem, doneTodo, deleteTodo, updateTodo}: {todoItem: {
     }
 
     const onClickEditTodo = () => {
-        // 업데이트
         updateTodo(id);
     }
 
   return (
     <>
         <li className="todo__item">
-            {/* <div className={`'todo__content' ${isComplete ? 'complete' : ''}`}> */}
             <div className={`todo__content ${isComplete ? 'complete' : ''}`}>
                 <div className="todo__item-check">
                     <label>
-                    {/* <input type="checkbox" onChange={onCheckedTodo} checked={isComplete}/> */}
                     <input type="checkbox" onChange={onCheckedTodo} />
                     <i className="todo__item-check-icon" />
                     <GoCheck className="todo__item-check-icon complete" />
